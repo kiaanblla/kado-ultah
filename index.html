@@ -381,36 +381,35 @@
       <div class="slider-track" id="sliderTrack">
         <!-- FOTO 0 -->
         <div class="slide">
-          <img src="hbd.jpg" alt="Foto Lucu 1">
+          <img src="hbd.jpg" alt="Foto Lucu 0">
           <a href="hbd.jpg" download="hbd.jpg" class="download-btn">⬇ Simpan</a>
         </div>
 
         <!-- FOTO 1 -->
         <div class="slide">
-          <img src="Foto1.jpeg" alt="Foto Lucu 1">
-          <a href="Foto1.jpeg" download="Foto_Lucu_1.jpeg" class="download-btn">⬇ Simpan</a>
+          <img src="foto1.jpeg" alt="Foto Lucu 1">
+          <a href="foto1.jpeg" download="Foto_Lucu_1.jpeg" class="download-btn">⬇ Simpan</a>
         </div>
 
         <!-- FOTO 2 -->
         <div class="slide">
-          <img src="Foto2.webp" alt="Foto Lucu 2">
-          <a href="Foto2.webp" download="Foto_Lucu_2.webp" class="download-btn">⬇ Simpan</a>
+          <img src="foto2.webp" alt="Foto Lucu 2">
+          <a href="foto2.webp" download="Foto_Lucu_2.webp" class="download-btn">⬇ Simpan</a>
         </div>
 
         <!-- FOTO 3 -->
         <div class="slide">
-          <img src="Foto3.webp" alt="Foto Lucu 3">
-          <a href="Foto3.webp" download="Foto_Lucu_3.webp" class="download-btn">⬇ Simpan</a>
+          <img src="foto3.webp" alt="Foto Lucu 3">
+          <a href="foto3.webp" download="Foto_Lucu_3.webp" class="download-btn">⬇ Simpan</a>
         </div>
 
         <!-- FOTO 4 -->
         <div class="slide">
-          <img src="Foto4.jpeg" alt="Foto Lucu 4">
-          <a href="Foto4.jpeg" download="Foto4.jpeg" class="download-btn">⬇ Simpan</a>
+          <img src="foto4.jpeg" alt="Foto Lucu 4">
+          <a href="foto4.jpeg" download="Foto4.jpeg" class="download-btn">⬇ Simpan</a>
         </div>
-      </div>
 
-      <!-- FOTO 5 -->
+        <!-- FOTO 5 -->
         <div class="slide">
           <img src="i love you.jpg" alt="Foto Lucu 5">
           <a href="i love you.jpg" download="i love you.jpg" class="download-btn">⬇ Simpan</a>
@@ -433,7 +432,7 @@ Love u sm.
       <div class="now-playing">
         <div class="song-info">
           <div class="song-label">🎵 Playlist Buat Kamu</div>
-          <div class="song-title" id="currentSongTitle">Judul Lagu 1</div>
+          <div class="song-title" id="currentSongTitle">honeybee - Olivia Rodrigo</div>
         </div>
         <div class="player-controls">
           <button class="ctrl-btn" onclick="prevSong()" aria-label="Lagu sebelumnya">⏮</button>
@@ -450,7 +449,7 @@ Love u sm.
   </div>
 
   <script>
-    // --- DAFTAR LAGU KAMU (Edit judul & nama file MP3-nya di sini) ---
+    // --- DAFTAR LAGU KAMU ---
     const songs = [
       { title: "honeybee - Olivia Rodrigo", file: "Honeybee.mp3" },
       { title: "u  me  3 - Olivia Rodrigo", file: "u  me  3 - Olivia Rodrigo.mp3" },
@@ -512,10 +511,8 @@ Love u sm.
       playPauseBtn.textContent = '⏸';
     }
 
-    // Otomatis lanjut ke lagu berikutnya saat lagu selesai
     audioPlayer.addEventListener('ended', nextSong);
 
-    // Update garis durasi lagu
     audioPlayer.addEventListener('timeupdate', () => {
       if (audioPlayer.duration) {
         progressBar.value = (audioPlayer.currentTime / audioPlayer.duration) * 100;
@@ -548,12 +545,9 @@ Love u sm.
       const heartGrid = document.getElementById('heartGrid');
       const mainCard = document.getElementById('mainCard');
 
-      // Mulai memutar lagu otomatis saat tombol kejutan dipencet!
       audioPlayer.play().then(() => {
         playPauseBtn.textContent = '⏸';
-      }).catch(() => {
-        // Jika browser memblokir autoplay, tombol tetap siap dipencet manual
-      });
+      }).catch(() => {});
 
       surpriseScreen.style.opacity = '0';
       surpriseScreen.style.transform = 'scale(0.95)';
