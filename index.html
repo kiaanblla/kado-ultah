@@ -15,7 +15,6 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      /* Background foto texture dengan lapisan tipis biru-hijau lembut */
       background-image: 
         linear-gradient(135deg, rgba(224, 242, 254, 0.45) 0%, rgba(220, 252, 231, 0.45) 100%),
         url('texture.jpg');
@@ -23,8 +22,104 @@
       background-position: center;
       background-attachment: fixed;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow-x: hidden;
     }
+
+    /* --- LAYAR SURPRISE AWAL --- */
+    #surpriseScreen {
+      text-align: center;
+      background-color: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(8px);
+      padding: 36px 28px;
+      border-radius: 26px;
+      box-shadow: 0 12px 30px rgba(45, 106, 128, 0.15);
+      border: 2px solid #BAE6FD;
+      max-width: 380px;
+      width: 100%;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    #surpriseScreen h2 {
+      color: #0369A1;
+      font-size: 21px;
+      margin: 0 0 10px 0;
+    }
+    #surpriseScreen p {
+      color: #475569;
+      font-size: 14.5px;
+      margin: 0 0 24px 0;
+    }
+    .surprise-btn {
+      background: linear-gradient(135deg, #0EA5E9 0%, #10B981 100%);
+      color: #FFFFFF;
+      border: none;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 15px 30px;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(14, 165, 233, 0.32);
+      transition: transform 0.2s, box-shadow 0.2s;
+      animation: pulseBtn 2s infinite;
+    }
+    .surprise-btn:hover {
+      transform: scale(1.05);
+    }
+    @keyframes pulseBtn {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.04); }
+    }
+
+    /* --- LAYAR ANIMASI KOTAK MERAH LOVE --- */
+    #heartScreen {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      transition: opacity 0.6s ease;
+    }
+    .heart-grid {
+      display: grid;
+      grid-template-columns: repeat(9, 24px);
+      grid-template-rows: repeat(8, 24px);
+      gap: 6px;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(6px);
+      border-radius: 24px;
+      border: 2px solid #BAE6FD;
+      box-shadow: 0 10px 25px rgba(244, 63, 94, 0.15);
+    }
+    .pixel {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      background-color: transparent;
+      transform: scale(0);
+      opacity: 0;
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+    }
+    .pixel.red {
+      background: linear-gradient(135deg, #FB7185 0%, #E11D48 100%);
+      box-shadow: 0 3px 8px rgba(225, 29, 72, 0.35);
+    }
+    .pixel.show {
+      transform: scale(1);
+      opacity: 1;
+    }
+    .heart-beat {
+      animation: heartbeat 0.8s ease-in-out infinite;
+    }
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.06); }
+    }
+
+    /* --- KARTU UTAMA --- */
     .card {
+      display: none;
+      opacity: 0;
+      transform: translateY(15px);
       background-color: rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(8px);
       max-width: 420px;
@@ -34,6 +129,11 @@
       box-shadow: 0 12px 30px rgba(45, 106, 128, 0.15);
       text-align: center;
       border: 2px solid #BAE6FD;
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .card.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* Container Slider Foto */
@@ -144,90 +244,351 @@
       font-size: 23px;
       margin: 0 0 10px 0;
     }
-    p {
+    .card p {
       color: #475569;
       font-size: 14.5px;
       line-height: 1.65;
-      margin: 0 0 24px 0;
+      margin: 0 0 20px 0;
       padding: 0 4px;
+      white-space: pre-line;
     }
-    .spotify-btn {
-      display: inline-flex;
+
+    /* --- CUSTOM MUSIC PLAYER --- */
+    .music-player {
+      background: linear-gradient(135deg, #F0F9FF 0%, #ECFDF5 100%);
+      border: 2px solid #A7F3D0;
+      border-radius: 20px;
+      padding: 16px;
+      text-align: left;
+      box-shadow: 0 6px 16px rgba(14, 165, 233, 0.12);
+    }
+    .now-playing {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .song-info {
+      overflow: hidden;
+    }
+    .song-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: #0D9488;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .song-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #0369A1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .player-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .ctrl-btn {
+      background-color: #FFFFFF;
+      color: #0369A1;
+      border: 1.5px solid #BAE6FD;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 13px;
+      display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      transition: all 0.2s;
+    }
+    .ctrl-btn:hover {
+      background-color: #E0F2FE;
+    }
+    .play-btn {
       background: linear-gradient(135deg, #10B981 0%, #0EA5E9 100%);
       color: #FFFFFF;
-      text-decoration: none;
-      font-weight: 600;
+      border: none;
+      width: 40px;
+      height: 40px;
       font-size: 15px;
-      padding: 14px 26px;
-      border-radius: 50px;
-      transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 6px 16px rgba(14, 165, 233, 0.28);
+      box-shadow: 0 4px 10px rgba(14, 165, 233, 0.28);
     }
-    .spotify-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.35);
+    .play-btn:hover {
+      transform: scale(1.06);
+    }
+    .progress-bar {
+      width: 100%;
+      accent-color: #0D9488;
+      height: 5px;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+    .playlist-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      border-top: 1px solid #CCFBF1;
+      padding-top: 8px;
+      max-height: 130px;
+      overflow-y: auto;
+    }
+    .playlist-item {
+      padding: 7px 10px;
+      border-radius: 10px;
+      font-size: 13px;
+      color: #475569;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background-color 0.2s;
+    }
+    .playlist-item:hover {
+      background-color: rgba(186, 230, 253, 0.45);
+    }
+    .playlist-item.active {
+      background-color: #CCFBF1;
+      color: #0F766E;
+      font-weight: 600;
     }
   </style>
 </head>
 <body>
 
-  <div class="card">
-    <!-- Area Galeri Foto Geser -->
+  <!-- TAHAP 1: TOMBOL SURPRISE -->
+  <div id="surpriseScreen">
+    <h2>Hai, ada sesuatu buat kamu! 🌿</h2>
+    <p>Coba pencet tombol di bawah ini pelan-pelan ya...</p>
+    <button class="surprise-btn" onclick="startSurprise()">🎁 Buka Kejutan</button>
+  </div>
+
+  <!-- TAHAP 2: ANIMASI KOTAK MERAH MEMBENTUK LOVE -->
+  <div id="heartScreen">
+    <div class="heart-grid" id="heartGrid"></div>
+  </div>
+
+  <!-- TAHAP 3: KARTU UCAPAN, GALERI FOTO & MUSIC PLAYER -->
+  <div class="card" id="mainCard">
     <div class="slider-wrapper">
       <button class="nav-btn prev-btn" onclick="moveSlide(-1)" aria-label="Foto sebelumnya">❮</button>
       
       <div class="slider-track" id="sliderTrack">
         <!-- FOTO 1 -->
         <div class="slide">
-          <img src="1.jpeg" alt="Foto Lucu 1">
-          <a href="1.jpeg" download="Foto_Lucu_1.jpeg" class="download-btn">⬇ Simpan</a>
+          <img src="foto1.jpeg" alt="Foto Lucu 1">
+          <a href="foto1.jpeg" download="Foto_Lucu_1.jpeg" class="download-btn">⬇ Simpan</a>
         </div>
 
         <!-- FOTO 2 -->
         <div class="slide">
-          <img src="2.webp" alt="Foto Lucu 2">
-          <a href="2.webp" download="Foto_Lucu_2.webp" class="download-btn">⬇ Simpan</a>
+          <img src="foto2.webp" alt="Foto Lucu 2">
+          <a href="foto2.webp" download="Foto_Lucu_2.webp" class="download-btn">⬇ Simpan</a>
         </div>
 
-         <div class="slide">
-          <img src="3.webp" alt="Foto Lucu 3">
-          <a href="3.webp" download="Foto_Lucu_3.webp" class="download-btn">⬇ Simpan</a>
+        <!-- FOTO 3 -->
+        <div class="slide">
+          <img src="foto3.webp" alt="Foto Lucu 3">
+          <a href="foto3.webp" download="Foto_Lucu_3.webp" class="download-btn">⬇ Simpan</a>
         </div>
 
         <!-- FOTO 4 -->
         <div class="slide">
-          <img src="4.jpeg" alt="Foto Lucu 4">
-          <a href="4.jpeg" download="Foto_Lucu_4.jpeg" class="download-btn">⬇ Simpan</a>
+          <img src="foto4.jpeg" alt="Foto Lucu 4">
+          <a href="foto4.jpeg" download="Foto4.jpeg" class="download-btn">⬇ Simpan</a>
         </div>
       </div>
 
       <button class="nav-btn next-btn" onclick="moveSlide(1)" aria-label="Foto berikutnya">❯</button>
     </div>
 
-    <!-- Titik Indikator Halaman Foto -->
     <div class="dots-container" id="dotsContainer"></div>
 
-    <!-- Ucapan Ulang Tahun -->
     <h1>Happy Birthday! 🎂🌿</h1>
-    <p>
-      Selamat ulang tahun sayangkuu! Semoga hari-harimu selalu sejuk, tenang, 
-      dan penuh hal baik. Ini beberapa stok foto lucu aku biar kamu nggak kangen 
-      (bisa kamu simpen juga lho!). Jangan lupa dengerin playlist di bawah ini ya. 
-      Love u sm. 
+    <p>Selamat ulang tahun ya sayangg! Semoga hari-harimu selalu sejuk, tenang, dan penuh hal baik. Ini beberapa stok foto lucu aku biar kamu nggak kangen (bisa kamu simpen juga lho!). Jangan lupa dengerin playlist di bawah ini ya.
+Love u sm.
 
-      -ur gf
-    </p>
+-ur gf</p>
 
-    <!-- Tombol ke Playlist Spotify -->
-    <a href="https://open.spotify.com/playlist/3AUcc9JjwQyJ3EpdaTQFlZ?si=lAOI0k3yTdmKqQm8J1lmVg&utm_source=whatsapp" target="_blank" class="spotify-btn">
-      🎵 Dengerin Playlist Kamu
-    </a>
+    <!-- Pemutar Lagu Lokal (MP3) -->
+    <div class="music-player">
+      <div class="now-playing">
+        <div class="song-info">
+          <div class="song-label">🎵 Playlist Buat Kamu</div>
+          <div class="song-title" id="currentSongTitle">Judul Lagu 1</div>
+        </div>
+        <div class="player-controls">
+          <button class="ctrl-btn" onclick="prevSong()" aria-label="Lagu sebelumnya">⏮</button>
+          <button class="ctrl-btn play-btn" id="playPauseBtn" onclick="togglePlay()" aria-label="Putar/Jeda">▶</button>
+          <button class="ctrl-btn" onclick="nextSong()" aria-label="Lagu berikutnya">⏭</button>
+        </div>
+      </div>
+
+      <input type="range" id="progressBar" class="progress-bar" value="0" min="0" max="100">
+
+      <ul class="playlist-list" id="playlistList"></ul>
+      <audio id="audioPlayer"></audio>
+    </div>
   </div>
 
   <script>
+    // --- DAFTAR LAGU KAMU (Edit judul & nama file MP3-nya di sini) ---
+    const songs = [
+      { title: "Honeybee - Olivia Rodrigo", file: "Honeybee.mp3" },
+      { title: "Judul Lagu 2 - Penyanyi", file: "lagu2.mp3" },
+      { title: "Judul Lagu 3 - Penyanyi", file: "lagu3.mp3" }
+    ];
+
+    let currentSongIndex = 0;
+    const audioPlayer = document.getElementById('audioPlayer');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const currentSongTitle = document.getElementById('currentSongTitle');
+    const progressBar = document.getElementById('progressBar');
+    const playlistList = document.getElementById('playlistList');
+
+    function initPlaylist() {
+      playlistList.innerHTML = '';
+      songs.forEach((song, index) => {
+        const li = document.createElement('li');
+        li.className = 'playlist-item' + (index === currentSongIndex ? ' active' : '');
+        li.innerHTML = `<span>${index + 1}. ${song.title}</span><span>${index === currentSongIndex ? '🎶' : ''}</span>`;
+        li.onclick = () => {
+          loadSong(index);
+          audioPlayer.play();
+          playPauseBtn.textContent = '⏸';
+        };
+        playlistList.appendChild(li);
+      });
+    }
+
+    function loadSong(index) {
+      currentSongIndex = index;
+      audioPlayer.src = songs[index].file;
+      currentSongTitle.textContent = songs[index].title;
+      initPlaylist();
+    }
+
+    function togglePlay() {
+      if (audioPlayer.paused) {
+        audioPlayer.play();
+        playPauseBtn.textContent = '⏸';
+      } else {
+        audioPlayer.pause();
+        playPauseBtn.textContent = '▶';
+      }
+    }
+
+    function prevSong() {
+      let newIndex = currentSongIndex - 1;
+      if (newIndex < 0) newIndex = songs.length - 1;
+      loadSong(newIndex);
+      audioPlayer.play();
+      playPauseBtn.textContent = '⏸';
+    }
+
+    function nextSong() {
+      let newIndex = currentSongIndex + 1;
+      if (newIndex >= songs.length) newIndex = 0;
+      loadSong(newIndex);
+      audioPlayer.play();
+      playPauseBtn.textContent = '⏸';
+    }
+
+    // Otomatis lanjut ke lagu berikutnya saat lagu selesai
+    audioPlayer.addEventListener('ended', nextSong);
+
+    // Update garis durasi lagu
+    audioPlayer.addEventListener('timeupdate', () => {
+      if (audioPlayer.duration) {
+        progressBar.value = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+      }
+    });
+
+    progressBar.addEventListener('input', () => {
+      if (audioPlayer.duration) {
+        audioPlayer.currentTime = (progressBar.value / 100) * audioPlayer.duration;
+      }
+    });
+
+    loadSong(0);
+
+    // --- ANIMASI SURPRISE & KOTAK LOVE ---
+    const heartPattern = [
+      [0, 1, 1, 0, 0, 0, 1, 1, 0],
+      [1, 1, 1, 1, 0, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [1, 1, 1, 1, 1, 1, 1, 1, 1],
+      [0, 1, 1, 1, 1, 1, 1, 1, 0],
+      [0, 0, 1, 1, 1, 1, 1, 0, 0],
+      [0, 0, 0, 1, 1, 1, 0, 0, 0],
+      [0, 0, 0, 0, 1, 0, 0, 0, 0]
+    ];
+
+    function startSurprise() {
+      const surpriseScreen = document.getElementById('surpriseScreen');
+      const heartScreen = document.getElementById('heartScreen');
+      const heartGrid = document.getElementById('heartGrid');
+      const mainCard = document.getElementById('mainCard');
+
+      // Mulai memutar lagu otomatis saat tombol kejutan dipencet!
+      audioPlayer.play().then(() => {
+        playPauseBtn.textContent = '⏸';
+      }).catch(() => {
+        // Jika browser memblokir autoplay, tombol tetap siap dipencet manual
+      });
+
+      surpriseScreen.style.opacity = '0';
+      surpriseScreen.style.transform = 'scale(0.95)';
+
+      setTimeout(() => {
+        surpriseScreen.style.display = 'none';
+        heartScreen.style.display = 'flex';
+
+        const redPixels = [];
+
+        heartPattern.forEach(row => {
+          row.forEach(cell => {
+            const div = document.createElement('div');
+            div.classList.add('pixel');
+            if (cell === 1) {
+              div.classList.add('red');
+              redPixels.push(div);
+            }
+            heartGrid.appendChild(div);
+          });
+        });
+
+        redPixels.forEach((pixel, index) => {
+          setTimeout(() => {
+            pixel.classList.add('show');
+          }, index * 32);
+        });
+
+        const totalBuildTime = redPixels.length * 32 + 200;
+        setTimeout(() => {
+          heartGrid.classList.add('heart-beat');
+        }, totalBuildTime);
+
+        setTimeout(() => {
+          heartScreen.style.opacity = '0';
+          setTimeout(() => {
+            heartScreen.style.display = 'none';
+            mainCard.style.display = 'block';
+            requestAnimationFrame(() => {
+              mainCard.classList.add('visible');
+            });
+          }, 500);
+        }, totalBuildTime + 1300);
+
+      }, 450);
+    }
+
+    // --- SCRIPT GALERI SLIDER FOTO ---
     const track = document.getElementById('sliderTrack');
     const slides = document.querySelectorAll('.slide');
     const dotsContainer = document.getElementById('dotsContainer');
