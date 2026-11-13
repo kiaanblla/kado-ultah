@@ -15,6 +15,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
+<<<<<<< HEAD
       /* Background foto texture dengan lapisan tipis biru-hijau lembut */
       background-image: 
         linear-gradient(135deg, rgba(224, 242, 254, 0.45) 0%, rgba(220, 252, 231, 0.45) 100%),
@@ -22,6 +23,10 @@
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
+=======
+      /* Gradasi biru langit lembut ke hijau mint/sage pastel */
+      background: linear-gradient(135deg, #E0F2FE 0%, #DCFCE7 100%);
+>>>>>>> 99cacdfc64aedc4223fe6cf616acafe043b6339d
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
     .card {
@@ -31,7 +36,11 @@
       width: 100%;
       padding: 28px 22px;
       border-radius: 26px;
+<<<<<<< HEAD
       box-shadow: 0 12px 30px rgba(45, 106, 128, 0.15);
+=======
+      box-shadow: 0 12px 30px rgba(45, 106, 128, 0.12);
+>>>>>>> 99cacdfc64aedc4223fe6cf616acafe043b6339d
       text-align: center;
       border: 2px solid #BAE6FD;
     }
@@ -51,16 +60,27 @@
       overflow-x: auto;
       scroll-snap-type: x mandatory;
       scroll-behavior: smooth;
+<<<<<<< HEAD
       scrollbar-width: none;
     }
     .slider-track::-webkit-scrollbar {
       display: none;
+=======
+      scrollbar-width: none; /* Sembunyikan scrollbar di Firefox */
+    }
+    .slider-track::-webkit-scrollbar {
+      display: none; /* Sembunyikan scrollbar di Chrome/Safari */
+>>>>>>> 99cacdfc64aedc4223fe6cf616acafe043b6339d
     }
     .slide {
       position: relative;
       min-width: 100%;
       scroll-snap-align: center;
+<<<<<<< HEAD
       aspect-ratio: 4 / 5;
+=======
+      aspect-ratio: 4 / 5; /* Rasio foto potret biar pas di layar HP */
+>>>>>>> 99cacdfc64aedc4223fe6cf616acafe043b6339d
     }
     .slide img {
       width: 100%;
@@ -192,7 +212,12 @@
           <a href="2.webp" download="Foto_Lucu_2.webp" class="download-btn">⬇ Simpan</a>
         </div>
 
+<<<<<<< HEAD
          <div class="slide">
+=======
+        <!-- FOTO 3 -->
+        <div class="slide">
+>>>>>>> 99cacdfc64aedc4223fe6cf616acafe043b6339d
           <img src="3.webp" alt="Foto Lucu 3">
           <a href="3.webp" download="Foto_Lucu_3.webp" class="download-btn">⬇ Simpan</a>
         </div>
@@ -202,6 +227,11 @@
           <img src="4.jpeg" alt="Foto Lucu 4">
           <a href="4.jpeg" download="Foto_Lucu_4.jpeg" class="download-btn">⬇ Simpan</a>
         </div>
+<<<<<<< HEAD
+=======
+
+        <!-- Kalau mau nambah foto ke-4 dst, tinggal copy-paste blok <div class="slide">...</div> di atas -->
+>>>>>>> 99cacdfc64aedc4223fe6cf616acafe043b6339d
       </div>
 
       <button class="nav-btn next-btn" onclick="moveSlide(1)" aria-label="Foto berikutnya">❯</button>
@@ -219,7 +249,11 @@
     </p>
 
     <!-- Tombol ke Playlist Spotify -->
+<<<<<<< HEAD
     <a href="https://open.spotify.com/playlist/3AUcc9JjwQyJ3EpdaTQFlZ?si=lAOI0k3yTdmKqQm8J1lmVg&utm_source=whatsapp" target="_blank" class="spotify-btn">
+=======
+    <a href="https://open.spotify.com/" target="_blank" class="spotify-btn">
+>>>>>>> 99cacdfc64aedc4223fe6cf616acafe043b6339d
       🎵 Dengerin Playlist Kamu
     </a>
   </div>
@@ -229,6 +263,10 @@
     const slides = document.querySelectorAll('.slide');
     const dotsContainer = document.getElementById('dotsContainer');
 
+<<<<<<< HEAD
+=======
+    // Buat titik indikator otomatis sesuai jumlah foto
+>>>>>>> 99cacdfc64aedc4223fe6cf616acafe043b6339d
     slides.forEach((_, index) => {
       const dot = document.createElement('div');
       dot.classList.add('dot');
@@ -244,6 +282,10 @@
 
     const dots = document.querySelectorAll('.dot');
 
+<<<<<<< HEAD
+=======
+    // Update titik aktif saat digeser manual di HP atau klik panah
+>>>>>>> 99cacdfc64aedc4223fe6cf616acafe043b6339d
     track.addEventListener('scroll', () => {
       const activeIndex = Math.round(track.scrollLeft / track.clientWidth);
       dots.forEach((dot, idx) => {
@@ -251,6 +293,10 @@
       });
     });
 
+<<<<<<< HEAD
+=======
+    // Fungsi tombol panah kiri/kanan
+>>>>>>> 99cacdfc64aedc4223fe6cf616acafe043b6339d
     function moveSlide(direction) {
       const currentIndex = Math.round(track.scrollLeft / track.clientWidth);
       let nextIndex = currentIndex + direction;
@@ -265,4 +311,8 @@
   </script>
 
 </body>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> 99cacdfc64aedc4223fe6cf616acafe043b6339d
